@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>hover effect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .check-list{
+      list-style: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+<ul class="check-list">
+  <li><input type="checkbox" checked> Opton 1</li>
+  <li><input type="checkbox"> Opton 2</li>
+  <li><input type="checkbox"> Opton 3</li>
+</ul>
+<button class="btn-check">체크된 체크박스 수</button>
+<button class="btn-toggle">toggle</button>
+
+<br>
+
+<p>약관동의가 체크되지 않았을 경우, alert으로 약관 동의를 요구</p>
+<textarea readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, natus officia voluptate vel quos fugit voluptates harum ab, repellat necessitatibus animi et optio, consequatur minus corrupti. In eum aut doloribus.</textarea>
+<br><input type="checkbox"> 확인
+
+<p>약관동의가 체크되지 않았을 경우, alert으로 약관 동의를 요구</p>
+<textarea readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, natus officia voluptate vel quos fugit voluptates harum ab, repellat necessitatibus animi et optio, consequatur minus corrupti. In eum aut doloribus.</textarea>
+<br>
+<input type="checkbox"> 확인
+<div>
+  <button>모두 확인</button>
+  <button>확인</button>
+</div>
+
+<script>
+  (function () {
+    var checkbox = document.querySelectorAll('.check-list input[type="checkbox"]');
+    var btnCheck = document.querySelector('.btn-check');
+    var btnToggle = document.querySelector('.btn-toggle');
+    
+    btnCheck.addEventListener('click', function () {
+      var SUM = 0;
+      for(var i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+          SUM++;
+        }
+      }
+      alert(SUM);
+    });
+
+    btnToggle.addEventListener('click', function () {
+      for (var i = 0; i < checkbox.length; i++) {
+        checkbox[i].checked = true;
+        // checkbox[i].checked
+
+        // console.log(checkbox[i].checked.length, checkbox.length);
+        // if (checkbox[i].checked === checkbox.length) {
+        //   checkbox[i].checked = false;
+        // } else {
+        //   checkbox[i].checked = true;
+        // }
+      }
+    });
+  }());
+</script>
+</body>
+</html>
