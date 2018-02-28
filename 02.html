@@ -20,13 +20,20 @@
 
 <script>
   (function () {
-    firstInput = document.getElementsByName('a');
-    lastInput = document.getElementsByName('b');
-    sumInput = document.getElementsByName('c');
-    btnConf = document.querySelector('input[type="button"]');
-
+    const firstInput = document.querySelector('input[name=a]');
+    const lastInput = document.querySelector('input[name=b]');
+    const sumInput = document.querySelector('input[name=result]');
+    const btnConf = document.querySelector('input[type="button"]');
+    const allInput = document.querySelectorAll('div input');
+    
     btnConf.addEventListener('click', function () {
-      // sumInput === firstInput + lastInput
+      for (let i = 0; i < allInput.length; i++) {
+        if (allInput[i].value === '') {
+          alert('값을 모두 입력해주세요');
+          return;
+        }
+      }
+      +sumInput.value === +firstInput.value + +lastInput.value ? alert(`올바른 정답입니다`) : alert(`올바른 정답이 아닙니다`);
     });
   }());
 </script>

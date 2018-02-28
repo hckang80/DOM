@@ -10,6 +10,10 @@
       list-style: none;
       padding: 0;
     }
+    .read-area{
+      width: 100%;
+      height: 100px;
+    }
   </style>
 </head>
 <body>
@@ -22,47 +26,68 @@
 <button class="btn-toggle">toggle</button>
 
 <br>
+<div class="agree-area">
+  <p>약관동의가 체크되지 않았을 경우, alert으로 약관 동의를 요구</p>
+  <textarea class="read-area" readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, natus officia voluptate vel quos fugit voluptates harum ab, repellat necessitatibus animi et optio, consequatur minus corrupti. In eum aut doloribus.</textarea>
+  <br><input type="checkbox"> 확인
 
-<p>약관동의가 체크되지 않았을 경우, alert으로 약관 동의를 요구</p>
-<textarea readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, natus officia voluptate vel quos fugit voluptates harum ab, repellat necessitatibus animi et optio, consequatur minus corrupti. In eum aut doloribus.</textarea>
-<br><input type="checkbox"> 확인
-
-<p>약관동의가 체크되지 않았을 경우, alert으로 약관 동의를 요구</p>
-<textarea readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, natus officia voluptate vel quos fugit voluptates harum ab, repellat necessitatibus animi et optio, consequatur minus corrupti. In eum aut doloribus.</textarea>
-<br>
-<input type="checkbox"> 확인
-<div>
-  <button>모두 확인</button>
-  <button>확인</button>
+  <p>약관동의가 체크되지 않았을 경우, alert으로 약관 동의를 요구</p>
+  <textarea class="read-area" readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, natus officia voluptate vel quos fugit voluptates harum ab, repellat necessitatibus animi et optio, consequatur minus corrupti. In eum aut doloribus.</textarea>
+  <br>
+  <input type="checkbox"> 확인
+  <br><br>
+  <div>
+    <button class="btn-conf-all">모두 확인</button>
+    <button class="btn-submit">전송</button>
+  </div>
 </div>
-
 <script>
   (function () {
-    var checkbox = document.querySelectorAll('.check-list input[type="checkbox"]');
-    var btnCheck = document.querySelector('.btn-check');
-    var btnToggle = document.querySelector('.btn-toggle');
+    const chkBoxArr = [];
+    const checkbox = document.querySelectorAll('.check-list input[type=checkbox]');
+    const btnCheck = document.querySelector('.btn-check');
+    const btnToggle = document.querySelector('.btn-toggle');
+    const chkAgreeArr = [];
+    const chkAgreeEl = document.querySelectorAll('.agree-area input[type=checkbox]');
+    const btnConfAll = document.querySelector('.btn-conf-all');
+    const btnSubmit = document.querySelector('.btn-submit');
     
-    btnCheck.addEventListener('click', function () {
-      var SUM = 0;
-      for(var i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].checked) {
-          SUM++;
-        }
-      }
-      alert(SUM);
+    for (let i = 0; i < checkbox.length; i++) {
+      chkBoxArr.push(checkbox[i]);
+    }
+
+    function checkedLength() {
+      const checkbox_check = chkBoxArr.filter(item => item.checked);
+      return checkbox_check.length;
+    }
+
+    btnCheck.addEventListener('click', () => {
+      alert(checkedLength());
     });
 
-    btnToggle.addEventListener('click', function () {
-      for (var i = 0; i < checkbox.length; i++) {
-        checkbox[i].checked = true;
-        // checkbox[i].checked
+    btnToggle.addEventListener('click', () => {
+      const reserveAll = checkbox.length !== checkedLength();
+      chkBoxArr.map(item => item.checked = reserveAll);
+    });
 
-        // console.log(checkbox[i].checked.length, checkbox.length);
-        // if (checkbox[i].checked === checkbox.length) {
-        //   checkbox[i].checked = false;
-        // } else {
-        //   checkbox[i].checked = true;
-        // }
+    for (let i = 0; i < chkAgreeEl.length; i++) {
+      chkAgreeArr.push(chkAgreeEl[i]);
+    }
+    
+    function agreeCheckedLength() {
+      const agreeCheck = chkAgreeArr.filter(item => item.checked);
+      return agreeCheck.length;
+    }
+
+    btnConfAll.addEventListener('click', () => {
+      const confAllState = chkAgreeEl.length !== agreeCheckedLength();
+      chkAgreeArr.map(item => item.checked = confAllState);
+    });
+
+    btnSubmit.addEventListener('click', () => {
+      if (chkAgreeEl.length !== agreeCheckedLength()) {
+        alert(`가입하려면 모든 약관에 동의해 주세요`);
+        return;
       }
     });
   }());
