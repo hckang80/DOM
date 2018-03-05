@@ -1,6 +1,5 @@
 # Custom
 *.json
-node_modules
 .eslintrc.js
 .vscode
 
