@@ -32,9 +32,9 @@
     (function () {
       const items = document.querySelectorAll('img[id^=img-]');
       const imagesEl = [].slice.call(items);
+      const imgSrc = imagesEl.map(img => img.getAttribute('src'));
       const slideBtn = document.querySelector('#btn');
       const toggleBtn = document.querySelector('#toggle');
-      const imgSrc = imagesEl.map(img => img.getAttribute('src'));
 
       function slideFn() {
         imgSrc.push(imgSrc.shift());
